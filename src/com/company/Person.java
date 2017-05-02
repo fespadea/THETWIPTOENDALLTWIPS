@@ -8,4 +8,6 @@ public class Person {
         person = p;
     }
     public int person;
+    public double score1 = 0;
+    public double score2 = 0;
 }

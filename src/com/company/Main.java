@@ -13,9 +13,21 @@ public class Main {
         raw.nextLine();
         while(raw.hasNext()){
             Person now = new Person(raw.nextInt());
+            raw.next();
             String current = raw.next();
-            while(current.contains()){
-
+            while (!current.contains("\"")) {
+                current = raw.next();
+                try{
+                    now.score1 += Double.parseDouble(current);
+                } catch(Exception e){
+                }
+            }
+            now.score1 -= raw.nextInt()/4.0;
+            while (!current.contains("\"")) {
+                current = raw.next();
+            }
+            while (!current.contains("\"")) {
+                current = raw.next();
             }
         }
     }
