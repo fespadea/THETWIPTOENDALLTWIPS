@@ -12,23 +12,45 @@ public class Main {
         ArrayList<Person> lty = new ArrayList<>();
         raw.nextLine();
         while(raw.hasNext()){
-            Person now = new Person(raw.nextInt());
-            raw.next();
-            String current = raw.next();
-            while (!current.contains("\"")) {
+            Person now = new Person(raw.nextDouble());
+            int sc = 0;
+            String current;
+            String previous = "";
+            double cur;
+            int x = 0;
+            while(sc < 1){
                 current = raw.next();
-                try{
-                    now.score1 += Double.parseDouble(current);
+                try {
+                    System.out.println(x++);
+                    cur = Double.parseDouble(current);
+                    if(previous.contains("\"")){
+                        now.score1 += cur;
+                    }
+                    else {
+                        now.score1 -= cur/4;
+                        sc++;
+                    }
                 } catch(Exception e){
                 }
+                previous = current;
             }
-            now.score1 -= raw.nextInt()/4.0;
-            while (!current.contains("\"")) {
+            while(sc < 2){
                 current = raw.next();
+                try {
+                    cur = Double.parseDouble(current);
+                    if(previous.contains("\"")){
+                        now.score2 += cur;
+                    }
+                    else {
+                        now.score2 -= cur/4;
+                        sc++;
+                    }
+                } catch(Exception e){
+                }
+                previous = current;
             }
-            while (!current.contains("\"")) {
-                current = raw.next();
-            }
+            System.out.println(now.score1);
+            System.out.println(now.score2);
         }
     }
 }
