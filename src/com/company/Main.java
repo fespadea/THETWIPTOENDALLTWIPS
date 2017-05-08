@@ -10,9 +10,32 @@ public class Main {
     public static void main(String[] args) throws IOException {
         Scanner raw = new Scanner(new File("rawDataU6.txt"));
         ArrayList<Person> lty = new ArrayList<>();
-        raw.nextLine();
+        for (int i = 0; i < 91; i++) {
+            raw.next();
+        }
+        int index = -1;
         while(raw.hasNext()){
-            Person now = new Person(raw.nextDouble());
+            int c = 0;
+            double pi = -1;
+            while(c < 1){
+                try{
+                    pi = raw.nextDouble();
+                    c++;
+                }catch (Exception e){
+                    System.out.println(raw.next());
+                }
+            }
+            System.out.println("pi: " + pi);
+            try{
+            if(pi != lty.get(index).person) {
+                Person now = new Person(pi);
+                lty.add(now);
+                index++;
+            }} catch (Exception e){
+                Person now = new Person(pi);
+                lty.add(now);
+                index++;
+            }
             int sc = 0;
             String current;
             String previous = "";
@@ -20,37 +43,44 @@ public class Main {
             int x = 0;
             while(sc < 1){
                 current = raw.next();
+                System.out.println("current: " + current);
                 try {
-                    System.out.println(x++);
                     cur = Double.parseDouble(current);
-                    if(previous.contains("\"")){
-                        now.score1 += cur;
+                    System.out.println("count: " + x++);
+                    if(previous.contains("+")){
+                        lty.get(index).score1 += cur;
+                        System.out.println("score: " + lty.get(index).score1);
                     }
                     else {
-                        now.score1 -= cur/4;
-                        sc++;
+                        lty.get(index).score1 -= cur/4;
+                        sc++;System.out.println("score: " + lty.get(index).score1);
                     }
                 } catch(Exception e){
                 }
                 previous = current;
+                System.out.println("previous: " + previous);
             }
             while(sc < 2){
                 current = raw.next();
+                System.out.println("current2: " + current);
                 try {
                     cur = Double.parseDouble(current);
-                    if(previous.contains("\"")){
-                        now.score2 += cur;
+                    System.out.println("count2: " + x++);
+                    if(previous.contains("+")){
+                        lty.get(index).score2 += cur;
+                        System.out.println("score2: " + lty.get(index).score2);
                     }
                     else {
-                        now.score2 -= cur/4;
-                        sc++;
+                        lty.get(index).score2 -= cur/4;
+                        sc++;System.out.println("score2: " + lty.get(index).score2);
                     }
                 } catch(Exception e){
                 }
                 previous = current;
+                System.out.println("previous2: " + previous);
             }
-            System.out.println(now.score1);
-            System.out.println(now.score2);
+            System.out.println(lty.get(index).score1);
+            System.out.println(lty.get(index).score2);
         }
     }
 }
