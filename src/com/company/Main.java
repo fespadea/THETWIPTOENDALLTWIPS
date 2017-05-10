@@ -1,6 +1,8 @@
 package com.company;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -8,34 +10,29 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        Scanner raw = new Scanner(new File("rawDataU6.txt"));
         ArrayList<Person> lty = new ArrayList<>();
-        for (int i = 0; i < 91; i++) {
-            raw.next();
-        }
-        Scanner lines = new Scanner(new File("rawDataU6.txt"));
+        BufferedReader lines = new BufferedReader(new FileReader("rawDataU6.txt"));
         ArrayList<Scanner> listOfLines = new ArrayList<>();
-        while(lines.hasNextLine()) {
-            Scanner nower = new Scanner(lines.nextLine());
+        for (int i = 0; i < 55; i++) {
+            String s = lines.readLine();
+            Scanner nower = new Scanner(s);
             listOfLines.add(nower);
+            System.out.println(s);
         }
-        listOfLines.remove(1);
+        listOfLines.remove(0);
         listOfLines.remove(6);
         listOfLines.remove(26);
         listOfLines.remove(26);
-        for(Scanner s: listOfLines){
-            System.out.println(s);
-        }
         int index = -1;
-        while(raw.hasNext()){
+        for (int i = 0; i < 51; i++) {
             int c = 0;
             double pi = -1;
             while(c < 1){
                 try{
-                    pi = raw.nextDouble();
+                    pi = listOfLines.get(i).nextDouble();
                     c++;
                 }catch (Exception e){
-                    System.out.println(raw.next());
+                    System.out.println(listOfLines.get(i).next());
                 }
             }
             System.out.println("pi: " + pi);
@@ -56,8 +53,8 @@ public class Main {
             double cur = 0;
             int x = 0;
             int quotes = 0;
-            while(sc < 1 || quotes < 2){
-                current = raw.next();
+            while(sc < 1 && quotes < 2){
+                current = listOfLines.get(i).next();
                 System.out.println("current: " + current);
                 try {
                     cur = Double.parseDouble(current);
@@ -78,15 +75,17 @@ public class Main {
                 previous = current;
                 System.out.println("previous: " + previous);
             }
-            if(quotes > 2){
-                current = previous;
+            if(quotes > 1){
+                listOfLines.get(i).next();
+                current = listOfLines.get(i).next();
+                System.out.println("current: " + current);
                 System.out.println("cur: " + cur);
-                lty.get(index).score1 += cur/4;
+                lty.get(index).score1 -= cur/4;
             }
             sc = 0;
             quotes = 0;
-            while(sc < 1 || quotes < 2){
-                current = raw.next();
+            while(sc < 1 && quotes < 2){
+                current = listOfLines.get(i).next();
                 System.out.println("current2: " + current);
                 try {
                     cur = Double.parseDouble(current);
@@ -107,10 +106,14 @@ public class Main {
                 previous = current;
                 System.out.println("previous2: " + previous);
             }
-            if(quotes > 2){
-                current = previous;
-                System.out.println("cur: " + cur);
-                lty.get(index).score2 += cur/4;
+            if(quotes > 1){
+                try {
+                    listOfLines.get(i).next();
+                    current = listOfLines.get(i).next();
+                    System.out.println("current: " + current);
+                    lty.get(index).score2 -= cur / 4;
+                } catch(Exception e){
+                }
             }
             System.out.println(lty.get(index).score1);
             System.out.println(lty.get(index).score2);
