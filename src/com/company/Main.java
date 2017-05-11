@@ -52,10 +52,13 @@ public class Main {
             String previous = "";
             double cur = 0;
             int x = 0;
-            int quotes = 0;
-            while(sc < 1 && quotes < 2){
-                current = listOfLines.get(i).next();
-                System.out.println("current: " + current);
+            while(sc < 1){
+                try {
+                    current = listOfLines.get(i).next();
+                    System.out.println("current2: " + current);
+                } catch(Exception e){
+                    sc++;
+                }
                 try {
                     cur = Double.parseDouble(current);
                     System.out.println("count: " + x++);
@@ -68,25 +71,18 @@ public class Main {
                         sc++;System.out.println("score: " + lty.get(index).score1);
                     }
                 } catch(Exception e){
-                    if(current.contains("\"")){
-                        quotes++;
-                    }
                 }
                 previous = current;
                 System.out.println("previous: " + previous);
             }
-            if(quotes > 1){
-                listOfLines.get(i).next();
-                current = listOfLines.get(i).next();
-                System.out.println("current: " + current);
-                System.out.println("cur: " + cur);
-                lty.get(index).score1 -= cur/4;
-            }
             sc = 0;
-            quotes = 0;
-            while(sc < 1 && quotes < 2){
-                current = listOfLines.get(i).next();
-                System.out.println("current2: " + current);
+            while(sc < 1){
+                try {
+                    current = listOfLines.get(i).next();
+                    System.out.println("current2: " + current);
+                } catch(Exception e){
+                    sc++;
+                }
                 try {
                     cur = Double.parseDouble(current);
                     System.out.println("count2: " + x++);
@@ -99,21 +95,9 @@ public class Main {
                         sc++;System.out.println("score2: " + lty.get(index).score2);
                     }
                 } catch(Exception e){
-                    if(current.contains("\"")){
-                        quotes++;
-                    }
                 }
                 previous = current;
                 System.out.println("previous2: " + previous);
-            }
-            if(quotes > 1){
-                try {
-                    listOfLines.get(i).next();
-                    current = listOfLines.get(i).next();
-                    System.out.println("current: " + current);
-                    lty.get(index).score2 -= cur / 4;
-                } catch(Exception e){
-                }
             }
             System.out.println(lty.get(index).score1);
             System.out.println(lty.get(index).score2);
