@@ -1,11 +1,10 @@
 package com.company;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.DoubleSummaryStatistics;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
 
@@ -130,10 +129,43 @@ public class Main {
                 System.out.println("score2: " + lty.get(index).score2);
             }
         }
+        lty.get(11).score1 *= 2;
+        lty.get(14).score1 *= 2;
+        lty.get(20).score1 *= 2;
+        lty.get(24).score1 *= 2;
+        lty.get(25).score1 *= 2;
+        lty.get(11).score2 *= 2;
+        lty.get(14).score2 *= 2;
+        lty.get(20).score2 *= 2;
+        lty.get(24).score2 *= 2;
+        lty.get(25).score2 *= 2;
         for (int i = 0; i < 28; i++) {
             System.out.println("pi: " + lty.get(i).person);
-            System.out.println("score1: " + lty.get(i).score1/2);
-            System.out.println("score2: " + lty.get(i).score2/2);
+            System.out.println("score1: " + lty.get(i).score1 / 2);
+            System.out.println("score2: " + lty.get(i).score2 / 2);
+        }
+        for(Person p: lty){
+            Scanner check = new Scanner(new File("names.txt"));
+            for (int i = 0; i < 28; i++) {
+                String maybe = "";
+                double d = 0;
+                while(d == 0) {
+                    try{
+                        d = check.nextDouble();
+                    }
+                    catch (Exception e){
+                        maybe += check.next();
+                    }
+                }
+                if(p.person == d){
+                    p.name = maybe;
+                }
+            }
+        }
+        Collections.sort(lty);
+        System.out.println("Name\t\tSecret Number\t\tAvg Total Grade\t\tFR Q1 Grade\t\tFR Q2 Grade");
+        for(Person p: lty){
+            System.out.println(p.name + "\t\t" + p.person + "\t\t" + p.score2+p.score1+"/19" + "\t\t" + p.score1 + "\t\t" + p.score2);
         }
     }
 }
